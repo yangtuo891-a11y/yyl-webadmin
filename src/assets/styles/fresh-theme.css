@@ -1,0 +1,104 @@
+/* 生鲜电商管理后台主题样式 */
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+}
+
+/* 主色调 - 生鲜绿色 */
+:root {
+  --fresh-primary: #52c41a;
+  --fresh-primary-light: #73d13d;
+  --fresh-primary-dark: #389e0d;
+  --fresh-success: #52c41a;
+  --fresh-warning: #faad14;
+  --fresh-danger: #ff4d4f;
+  --fresh-info: #1890ff;
+}
+
+/* Element Plus 主题定制 */
+.el-button--primary {
+  background-color: var(--fresh-primary);
+  border-color: var(--fresh-primary);
+}
+
+.el-button--primary:hover {
+  background-color: var(--fresh-primary-light);
+  border-color: var(--fresh-primary-light);
+}
+
+.el-button--primary:active {
+  background-color: var(--fresh-primary-dark);
+  border-color: var(--fresh-primary-dark);
+}
+
+/* 卡片样式 */
+.el-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 表格样式 */
+.el-table {
+  border-radius: 8px;
+}
+
+.el-table th {
+  background-color: #fafafa;
+  color: #262626;
+  font-weight: 600;
+}
+
+/* 分页样式 */
+.el-pagination {
+  justify-content: flex-end;
+}
+
+/* 搜索栏样式 */
+.search-container {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* 商品信息样式 */
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-name {
+  font-weight: 500;
+  color: #262626;
+}
+
+/* 状态标签样式 */
+.el-tag {
+  border-radius: 4px;
+}
+
+/* 对话框样式 */
+.el-dialog {
+  border-radius: 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .search-container {
+    padding: 12px;
+  }
+  
+  .product-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
