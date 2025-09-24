@@ -3,8 +3,8 @@ pipeline {
     
     environment {
         PROJECT_NAME = 'hadluo-shop-webadmin'
-        PROJECT_PATH = '/opt/projects/hadluo-shop-webadmin'  // 服务器上的项目路径
-        DEPLOY_PATH = '/var/www/html/admin'  // 部署到8081端口对应的目录
+        PROJECT_PATH = '.'  // 使用Jenkins工作空间当前目录
+        DEPLOY_PATH = '/var/www/admin-frontend'  // 部署到8081端口对应的目录
         NODE_VERSION = '18'
         BUILD_SOURCE = 'webadmin'  // 标识这是管理端构建
     }
@@ -22,17 +22,22 @@ pipeline {
                     sh """
                         echo '验证项目类型...'
                         if [ -f "${PROJECT_PATH}/package.json" ]; then
-                            PROJECT_NAME_CHECK=\$(grep '"name"' ${PROJECT_PATH}/package.json | grep 'webadmin')
-                            if [ -n "\$PROJECT_NAME_CHECK" ]; then
+                            echo '找到package.json文件，检查项目名称...'
+                            PROJECT_NAME=\$(grep '"name"' ${PROJECT_PATH}/package.json | head -1)
+                            echo "项目名称行: \$PROJECT_NAME"
+                            
+                            if echo "\$PROJECT_NAME" | grep -q 'webadmin'; then
                                 echo '✅ 确认这是管理端项目 (webadmin)'
                             else
                                 echo '❌ 错误：这不是管理端项目！'
-                                cat ${PROJECT_PATH}/package.json | grep '"name"'
+                                echo '完整的package.json内容:'
+                                cat ${PROJECT_PATH}/package.json
                                 exit 1
                             fi
                         else
                             echo '❌ 错误：找不到package.json文件！'
-                            echo '项目路径: ${PROJECT_PATH}'
+                            echo "项目路径: ${PROJECT_PATH}"
+                            echo '当前目录内容:'
                             ls -la ${PROJECT_PATH}/ || echo '项目目录不存在'
                             exit 1
                         fi
